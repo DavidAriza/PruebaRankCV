@@ -54,6 +54,7 @@ class _BodyContainerState extends State<BodyContainer> with SingleTickerProvider
                 });
               },
             ),
+            SizedBox(width: 8.0,),
             RaisedButton(
               child: Text('Backend'),
               onPressed: (){
@@ -94,9 +95,13 @@ class _BodyContainerState extends State<BodyContainer> with SingleTickerProvider
       child: FutureBuilder(
         future: listaCursos(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
-          return snapshot.data.isNotEmpty 
-            ?crearData(context, snapshot)
-            :CircularProgressIndicator();
+          if( snapshot?.data?.isNotEmpty??false){ 
+            return crearData(context, snapshot);}
+            else{
+             return 
+             Center(child: CircularProgressIndicator());
+            }
+            
         },
       ),
     );
