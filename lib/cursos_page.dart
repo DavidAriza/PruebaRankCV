@@ -46,6 +46,7 @@ class _BodyContainerState extends State<BodyContainer> with SingleTickerProvider
       children: <Widget>[
         Row(
           children: <Widget>[
+            SizedBox(width: 8.0,),
             RaisedButton(
               child: Text('All'),
               onPressed: (){
