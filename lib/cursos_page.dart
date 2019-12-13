@@ -1,3 +1,5 @@
+import 'package:cursos/first_page.dart';
+import 'package:cursos/model/singleton.dart';
 import 'package:cursos/provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -11,9 +13,37 @@ class CursosPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.yellow[700],
-        title: Text('Cursos', style: TextStyle(color: Colors.black, fontSize: 25, fontWeight: FontWeight.bold )),
+        leading: IconButton(
+          icon: Icon(FontAwesomeIcons.arrowLeft),
+          onPressed: (){
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) =>    HomePage()),
+            );
+          },
+        ),
+        title: Text('Cursos', style: TextStyle(color: Colors.black, fontSize: 33, fontWeight: FontWeight.bold )),
       ),
       body: BodyContainer(),
+      bottomNavigationBar: BottomNavigationBar(
+         selectedItemColor: Colors.white,
+         backgroundColor: Colors.yellow[700] ,
+         items: <BottomNavigationBarItem> [
+            BottomNavigationBarItem(
+              title: Text('Cursos'),
+              icon: Icon(FontAwesomeIcons.list)           
+            ),
+            BottomNavigationBarItem(
+              title: Text('Ranking'),
+              icon: Icon(FontAwesomeIcons.star)
+            ),
+            BottomNavigationBarItem(
+              title: Text('Perfil'),
+              icon: Icon(FontAwesomeIcons.user)
+            )
+         ],
+
+       ),
     );
   }
 }
@@ -36,22 +66,30 @@ class _BodyContainerState extends State<BodyContainer> with SingleTickerProvider
 
   @override
   void dispose() {
-    super.dispose();
+    super.dispose(); 
     _controller.dispose();
   }
+
   
+
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
+        SizedBox(height: 10.0,),
+        Text('Bienvenido ${appData.text}', style: TextStyle(fontSize: 30),),
+        SizedBox(height: 10.0,),
         Row(
           children: <Widget>[
+            
             SizedBox(width: 8.0,),
             RaisedButton(
               child: Text('All'),
               onPressed: (){
                 setState(() {
                   selectedWidgetMarker = WidgetMarker.all;
+                  
                 });
               },
             ),
@@ -61,11 +99,13 @@ class _BodyContainerState extends State<BodyContainer> with SingleTickerProvider
               onPressed: (){
                 setState(() {
                   selectedWidgetMarker = WidgetMarker.backend;
+                  
                 });
               },
             ),
           ],
         ),
+        SizedBox(height: 15,),
         FutureBuilder(
           future: _animation(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
