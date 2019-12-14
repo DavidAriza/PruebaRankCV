@@ -82,7 +82,7 @@ class HomePageState extends State<HomePage> {
                 height: 10.0,
                 width: double.infinity,
               ),
-              Text('IncubeApp',
+              Text('IncubApp',
                   style: TextStyle(color: Colors.white, fontSize: 25))
             ],
           ),
